@@ -1,0 +1,44 @@
+{
+  "name": "inventory-backend-apis",
+  "version": "1.0.0",
+  "description": "Environment M System",
+  "main": "index.js",
+  "scripts": {
+    "start": "babel-node ./src/index.js",
+    "dev": "nodemon --exec npm start",
+    "createSeed": "npx sequelize-cli seed:generate --name demo-user",
+    "sequelizeInit":"sequelize-cli init",
+    "seedDb": "sequelize db:seed:all",
+    "migration": "sequelize-cli db:migrate"
+  },
+  "author": "Mahame Alfred",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/cli": "^7.23.9",
+    "@babel/core": "^7.24.0",
+    "@babel/node": "^7.23.9",
+    "@babel/polyfill": "^7.12.1",
+    "@babel/preset-env": "^7.24.0",
+    "@babel/runtime": "^7.24.0",
+    "bcrypt": "^5.1.1",
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "i18n-2": "^0.7.3",
+    "joi": "^17.12.0",
+    "joi-country-extension": "^1.2.0",
+    "joi-date-extensions": "^1.2.0",
+    "jsonwebtoken": "^9.0.2",
+    "nodemon": "^3.0.3",
+    "pg": "^8.11.3",
+    "pg-hstore": "^2.3.4",
+    "sequelize-cli": "^6.6.2",
+    "sequelizer": "^1.1.4",
+    "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "errorhandler": "^1.5.1",
+    "express-validator": "^7.0.1"
+  }
+}
