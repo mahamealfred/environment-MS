@@ -7,7 +7,7 @@
     "start": "babel-node ./src/index.js",
     "dev": "nodemon --exec npm start",
     "createSeed": "npx sequelize-cli seed:generate --name demo-user",
-    "sequelizeInit":"sequelize-cli init",
+    "sequelizeInit": "sequelize-cli init",
     "seedDb": "sequelize db:seed:all",
     "migration": "sequelize-cli db:migrate"
   },
@@ -30,6 +30,7 @@
     "joi-country-extension": "^1.2.0",
     "joi-date-extensions": "^1.2.0",
     "jsonwebtoken": "^9.0.2",
+    "node-fetch": "^3.3.2",
     "nodemon": "^3.0.3",
     "pg": "^8.11.3",
     "pg-hstore": "^2.3.4",

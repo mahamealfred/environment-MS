@@ -35,10 +35,39 @@ class CategoryController {
            include: [{ model: Complaint}],
         });
   
-        res.status(200).json({
+        return res.status(200).json({
           responseCode: 200,
           responseDescription: "Categories",
           data: categories 
+        });
+      } catch (error) {
+        return res.status(error.status || 500).json({
+          errors: {
+            error: error.message
+          }
+        });
+      }
+    }
+
+    static async deleteCategory(req, res) {
+      try {
+        const modelId = req.params.id;
+        const found = await Category.findOne({
+          where: { id: modelId },
+        });
+        if (found) {
+          await Category.destroy({
+            where: { id: modelId },
+          });
+          return res.status(200).json({
+            responseCode: 200,
+            responseDescription: "Category has been deleted"
+          });
+        }
+        return res.status(404).json({
+          responseCode: 404,
+          responseDescription: "Category Not Found"
+        
         });
       } catch (error) {
         return res.status(error.status || 500).json({
