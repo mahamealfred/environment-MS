@@ -5,6 +5,7 @@ import categoryRoutes from './category.routes';
 import questionRoutes from './question.routes';
 import locationRoutes from './location.routes';
 import complaintRoutes from "./complaint.routes";
+import userRoutes from "./user.routes";
 const router = Router();
 
 
@@ -14,6 +15,7 @@ router.use('/api/v1/category', categoryRoutes);
 router.use('/api/v1/question',questionRoutes);
 router.use('/api/v1/location',locationRoutes);
 router.use('/api/v1/complaint',complaintRoutes)
+router.use('/api/v1/users',userRoutes)
 
 
 

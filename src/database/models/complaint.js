@@ -36,11 +36,17 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Complaint.init({
-    userId: DataTypes.STRING,
+    date: DataTypes.STRING,
+    time:DataTypes.STRING,
+    additionalDetails:DataTypes.TEXT,
     categoryId: DataTypes.STRING,
+    consent:DataTypes.BOOLEAN,
+    locationId:DataTypes.STRING,
+    userId: DataTypes.STRING,
     locationId: DataTypes.STRING,
-    questionId: DataTypes.ARRAY(DataTypes.STRING),
-    description: DataTypes.ARRAY(DataTypes.STRING),
+    questionId: DataTypes.JSONB,
+    description: DataTypes.TEXT,
+    totalParcentage:DataTypes.DECIMAL,
     status: DataTypes.STRING
   }, {
     sequelize,

@@ -20,7 +20,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   Location.init({
     name: DataTypes.STRING,
-    address: DataTypes.STRING,
+    address: DataTypes.JSONB,
     latitude: DataTypes.DECIMAL,
     longitude: DataTypes.DECIMAL
   }, {

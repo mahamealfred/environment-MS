@@ -8,20 +8,35 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.STRING,
       },
+      date: {
+        type: Sequelize.STRING
+      },
+      time: {
+        type: Sequelize.STRING
+      },
+      additionalDetails: {
+        type: Sequelize.TEXT
+      },
+      consent: {
+        type: Sequelize.BOOLEAN
+      },
+      locationId: {
+        type: Sequelize.STRING
+      },
       userId: {
         type: Sequelize.STRING
       },
       categoryId: {
         type: Sequelize.STRING
       },
-      locationId: {
-        type: Sequelize.STRING
-      },
       questionId: {
-        type: Sequelize.ARRAY(Sequelize.STRING)
+        type: Sequelize.JSONB
       },
       description: {
-        type: Sequelize.ARRAY(Sequelize.STRING)
+        type: Sequelize.TEXT
+      },
+      totalParcentage: {
+        type: Sequelize.DECIMAL
       },
       status: {
         type: Sequelize.STRING

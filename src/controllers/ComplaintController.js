@@ -4,32 +4,37 @@ import { v4 as uuidv4 } from "uuid";
 const {
     Complaint,
     Location,
+    Category,
     User
 } = Models;
 class ComplaintController {
     static async addComplaint(req, res) {
+        
         const {
+            date,
+            time,
+            consent,
+            location,
             firstName,
+            locationName,
             lastName,
             email,
-            locationName,
-            address,
-            latitude,
-            longitude,
-            questionId,
-            categoryId
-
+            answers,
+            category,
+            additionalDetails,
+            description
         } = req.body
+      
         try {
-            const findUser = await User.findOne({
-                where: { email: email }
-            })
-            if (!findUser) {
-                return res.status(200).json({
-                    responseCode: 200,
-                    responseDescription: "Successfull Created",
-                });
-            }
+            // const findUser = await User.findOne({
+            //     where: { email: email }
+            // })
+            // if (!findUser) {
+            //     return res.status(200).json({
+            //         responseCode: 200,
+            //         responseDescription: "Successfull Created",
+            //     });
+            // }
             const userId=uuidv4()
             const locationId=uuidv4()
             const user=await User.create({
@@ -39,22 +44,27 @@ class ComplaintController {
                 email,
                 role:"User"
             })
-            const location=await Location.create({
+            const locations=await Location.create({
                 id:locationId,
                 name:locationName,
-                address,
-                latitude,
-                longitude
+                address:location,
+                latitude:12,
+                longitude:14
             })
 
-            const results = await Location.create({
+            const results = await Complaint.create({
               id: uuidv4(),
               userId:userId,
+              date,
+              time,
+              additionalDetails:additionalDetails,
+              consent:consent?consent:false,
               locationId:locationId,
-              categoryId:categoryId,
-              questionId:questionId,
+              categoryId:category,
+              questionId:answers,
               description:description,
-              status:"Pending"
+              totalParcentage:100,
+              status:"pending"
             });
             return res.status(201).json({
                 responseCode: 201,
@@ -71,7 +81,9 @@ class ComplaintController {
     }
     static async getAllComplaints(req, res) {
         try {
-            const complaints = await Complaint.findAll();
+            const complaints = await Complaint.findAll({
+                include: [{ model: Category},{model: Location},{model: User}],
+             });
 
             res.status(200).json({
                 responseCode: 200,

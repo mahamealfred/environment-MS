@@ -12,7 +12,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       address: {
-        type: Sequelize.STRING
+        type: Sequelize.JSONB
       },
       latitude: {
         type: Sequelize.DECIMAL
