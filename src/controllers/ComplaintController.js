@@ -5,8 +5,11 @@ const {
     Complaint,
     Location,
     Category,
-    User
+    User,
+    Action
 } = Models;
+
+
 class ComplaintController {
     static async addComplaint(req, res) {
         
@@ -22,7 +25,8 @@ class ComplaintController {
             answers,
             category,
             additionalDetails,
-            description
+            description,
+            total
         } = req.body
       
         try {
@@ -63,7 +67,7 @@ class ComplaintController {
               categoryId:category,
               questionId:answers,
               description:description,
-              totalParcentage:100,
+              totalParcentage:total,
               status:"pending"
             });
             return res.status(201).json({
@@ -82,7 +86,7 @@ class ComplaintController {
     static async getAllComplaints(req, res) {
         try {
             const complaints = await Complaint.findAll({
-                include: [{ model: Category},{model: Location},{model: User}],
+                include: [{ model: Category},{model: Location},{model: User},{model: Action}],
              });
 
             res.status(200).json({

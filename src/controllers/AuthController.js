@@ -31,6 +31,7 @@ class AuthController {
 			}
 			const token = encode({
 				email,
+				role:registered.role,
 			});
 			const data = {
 				id: registered.id,

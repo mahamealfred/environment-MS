@@ -27,13 +27,20 @@ module.exports = (sequelize, DataTypes) => {
         onDelete: "CASCADE",
         onUpdate: "CASCADE",
       });
-      
+      Complaint.hasMany(models.Action, {
+        foreignKey:'complaintId',
+        onDelete:'CASCADE',
+        onUpdate:'CASCADE',
+      });
+    
       Complaint.belongsTo(models.Location, {
         foreignKey: "locationId",
         onDelete: "CASCADE",
         onUpdate: "CASCADE",
       });
+      
     }
+    
   }
   Complaint.init({
     date: DataTypes.STRING,
