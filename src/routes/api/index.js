@@ -6,6 +6,8 @@ import questionRoutes from './question.routes';
 import locationRoutes from './location.routes';
 import complaintRoutes from "./complaint.routes";
 import userRoutes from "./user.routes";
+import actionRoutes from "./action.routes";
+import organizanizationRoutes from "./organization.routes";
 const router = Router();
 
 
@@ -16,6 +18,8 @@ router.use('/api/v1/question',questionRoutes);
 router.use('/api/v1/location',locationRoutes);
 router.use('/api/v1/complaint',complaintRoutes)
 router.use('/api/v1/users',userRoutes)
+router.use('/api/v1/action',actionRoutes)
+router.use('/api/v1/organization',organizanizationRoutes)
 
 
 
