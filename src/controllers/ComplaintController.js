@@ -1,6 +1,7 @@
 /* eslint-disable require-jsdoc */
 import Models from '../database/models';
 import { v4 as uuidv4 } from "uuid";
+import { complaintResolution, receiveComplaintNotification } from '../utils/emailGenerater';
 
 const {
     Complaint,
@@ -95,6 +96,7 @@ class ComplaintController {
               totalParcentage:total,
               status:"pending"
             });
+            await receiveComplaintNotification(firstName,lastName,email);
             return res.status(201).json({
                 responseCode: 201,
                 responseDescription: "Successfull Created",
@@ -115,8 +117,13 @@ class ComplaintController {
           const { id } = req.params;
           const found = await Complaint.findOne({
             where: { id },
+            include: [{ model: Category},{model: Location},{model: User},{model: Action ,include: [{ model: User }]  }],
           });
           if (found) {
+     
+            const firstName=found.User.dataValues.firstName
+            const lastName=found.User.dataValues.lastName
+            const email=found.User.dataValues.email
                 const updatedComplaint= await Complaint.update(
                     {
                       status:"approved"
@@ -124,7 +131,7 @@ class ComplaintController {
                     { where: { id },
                     returning: true, },
                   );
-          
+         await complaintResolution(firstName,lastName,email)
                 return  res.status(200).json({
                     responseCode: 200,
                     responseDescription: "Complaint approved successful",
@@ -151,6 +158,7 @@ class ComplaintController {
           const { id } = req.params;
           const found = await Complaint.findOne({
             where: { id },
+            
           });
           if (found) {
                 const updatedComplaint= await Complaint.update(
@@ -182,6 +190,7 @@ class ComplaintController {
       }
     
     static async getAllComplaints(req, res) {
+       
         try {
             const complaints = await Complaint.findAll({
                 include: [{ model: Category},{model: Location},{model: User},{model: Action ,include: [{ model: User }]  }],
